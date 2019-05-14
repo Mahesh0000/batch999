@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:batch="http://www.mulesoft.org/schema/mule/batch"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ab7577e5-3693-421f-a0cd-5780f0ce42f7" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="file-8Flow" doc:id="e75c1a79-d466-484e-9e9d-fdda748edc13" >
+		<http:listener doc:name="Listener" doc:id="68381e7b-0560-438e-8758-49970fb2545c" config-ref="HTTP_Listener_config" path="/file" allowedMethods="GET"/>
+		<file:move doc:name="Move" doc:id="005f2693-7204-45c4-a2ff-78d156fbcd1a" sourcePath="D:\workspace-4.0\file-8\src\main\resources\input" targetPath="D:\workspace-4.0\file-8\src\main\resources\output"/>
+		<logger level="INFO" doc:name="Logger" doc:id="35fe15d7-d3aa-431c-b855-b2bd976aa45c" message="#[payload]"/>
+	</flow>
+</mule>
